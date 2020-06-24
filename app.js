@@ -254,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
   };*/
   console.log(window.innerWidth)
   if (window.innerWidth < 900) {
+    /*
       function handleswipe(isrightswipe){
       if (isrightswipe)
         keyRight()
@@ -285,6 +286,10 @@ document.addEventListener('DOMContentLoaded', () =>  {
         handleswipe(swiperightBol)
         e.preventDefault()
     }, false)
+    */
+
+    $('.swipe').on('swipeleft', keyLeft)
+    $('.swipe').on('swiperight', keyRight)
 
   }
   else {
