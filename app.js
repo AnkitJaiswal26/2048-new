@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
   let squares = []
   const width = 4
   let score = 0
+  var threshold = 150 //required min distance traveled to be considered swipe
+  var allowedTime = 200
+  var elapsedTime
 
   //create the playing board
   function createBoard() {
@@ -152,9 +155,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
       keyDown()
     }
   }
-  /*document.addEventListener('keyup', control)*/
+  /*document.addEventListener('keyup', control)
 
-  /*function check(e) {
+  function check(e) {
     var cell = map[cellCoords.x][cellCoords.y];
     moves++;
     switch (e.keyCode) {
@@ -205,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
   }*/
 
-  this.bindKeyDown = function() {
-    window.addEventListener("keydown", control, false);
+  /*this.bindKeyDown = function() {
+    document.addEventListener("keydown", control, false);
 
     $("#view").swipe({
       swipe: function(
@@ -246,9 +249,49 @@ document.addEventListener('DOMContentLoaded', () =>  {
   };
 
   this.unbindKeyDown = function() {
-    window.removeEventListener("keydown", control, false);
+    document.removeEventListener("keydown", control, false);
     $("#view").swipe("destroy");
-  };
+  };*/
+  console.log(window.innerWidth)
+  if (window.innerWidth < 900) {
+      function handleswipe(isrightswipe){
+      if (isrightswipe)
+        keyRight()
+      else{
+        keyLeft
+      }
+    }
+  
+
+    gridDisplay.addEventListener('touchstart', function(e){
+        var touchobj = e.changedTouches[0]
+        dist = 0
+        startX = touchobj.pageX
+        startY = touchobj.pageY
+        startTime = new Date().getTime() // record time when finger first makes contact with surface
+        e.preventDefault()
+    }, false)
+
+    gridDisplay.addEventListener('touchmove', function(e){
+        e.preventDefault() // prevent scrolling when inside DIV
+    }, false)
+
+    gridDisplay.addEventListener('touchend', function(e){
+        var touchobj = e.changedTouches[0]
+        dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
+        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+        var swiperightBol = (elapsedTime <= allowedTime && dist >= threshold && Math.abs(touchobj.pageY - startY) <= 100)
+        handleswipe(swiperightBol)
+        e.preventDefault()
+    }, false)
+
+  }
+  else {
+    document.addEventListener('keyup', control)
+  }
+
+
 
   function keyRight() {
     moveRight()
