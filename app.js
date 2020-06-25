@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
 
 
 
-    detectswipe('swipe',control1);
+    detectswipe('.swipe',control1);
 
   }
   else {
