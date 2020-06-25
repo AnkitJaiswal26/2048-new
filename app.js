@@ -215,12 +215,13 @@ document.addEventListener('DOMContentLoaded', () =>  {
 
 
 
-    detectswipe('.swipe',control1);
+    detectswipe('swipeme',control1);
 
   }
   else {
     document.addEventListener('keyup', control)
   }
+
 
 
   function keyRight() {
