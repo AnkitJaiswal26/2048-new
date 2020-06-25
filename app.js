@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
   /*document.addEventListener('keyup', control)*/
 
   console.log(window.innerWidth)
-  if (window.innerWidth < 900) {
+  if (window.innerWidth < 1200) {
 
     function detectswipe(el,func) {
       swipe_det = new Object();
