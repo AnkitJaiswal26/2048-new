@@ -7,9 +7,6 @@ document.addEventListener('DOMContentLoaded', () =>  {
   const width = 4
  
   let score = 0
-  var threshold = 150 //required min distance traveled to be considered swipe
-  var allowedTime = 200
-  var elapsedTime
 
   //create the playing board
   function createBoard() {
@@ -158,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
   }
 
-  function control(e,d) {
+  function control1(e,d) {
     if(d == 'l') {
       keyLeft()
     } else if (d == 'u') {
@@ -169,141 +166,10 @@ document.addEventListener('DOMContentLoaded', () =>  {
       keyDown()
     }
   }
-  /*document.addEventListener('keyup', control)
+  /*document.addEventListener('keyup', control)*/
 
-  function check(e) {
-    var cell = map[cellCoords.x][cellCoords.y];
-    moves++;
-    switch (e.keyCode) {
-      case 65:
-      case 37: // west
-        if (cell.w == true) {
-          removeSprite(cellCoords);
-          cellCoords = {
-            x: cellCoords.x - 1,
-            y: cellCoords.y
-          };
-          drawSprite(cellCoords);
-        }
-        break;
-      case 87:
-      case 38: // north
-        if (cell.n == true) {
-          removeSprite(cellCoords);
-          cellCoords = {
-            x: cellCoords.x,
-            y: cellCoords.y - 1
-          };
-          drawSprite(cellCoords);
-        }
-        break;
-      case 68:
-      case 39: // east
-        if (cell.e == true) {
-          removeSprite(cellCoords);
-          cellCoords = {
-            x: cellCoords.x + 1,
-            y: cellCoords.y
-          };
-          drawSprite(cellCoords);
-        }
-        break;
-      case 83:
-      case 40: // south
-        if (cell.s == true) {
-          removeSprite(cellCoords);
-          cellCoords = {
-            x: cellCoords.x,
-            y: cellCoords.y + 1
-          };
-          drawSprite(cellCoords);
-        }
-        break;
-    }
-  }*/
-
-  /*this.bindKeyDown = function() {
-    document.addEventListener("keydown", control, false);
-
-    $("#view").swipe({
-      swipe: function(
-        event,
-        direction,
-        distance,
-        duration,
-        fingerCount,
-        fingerData
-      ) {
-        console.log(direction);
-        switch (direction) {
-          case "up":
-            control({
-              keyCode: 38
-            });
-            break;
-          case "down":
-            control({
-              keyCode: 40
-            });
-            break;
-          case "left":
-            control({
-              keyCode: 37
-            });
-            break;
-          case "right":
-            control({
-              keyCode: 39
-            });
-            break;
-        }
-      },
-      threshold: 0
-    });
-  };
-
-  this.unbindKeyDown = function() {
-    document.removeEventListener("keydown", control, false);
-    $("#view").swipe("destroy");
-  };*/
   console.log(window.innerWidth)
   if (window.innerWidth < 900) {
-    /*
-      function handleswipe(isrightswipe){
-      if (isrightswipe)
-        keyRight()
-      else{
-        keyLeft
-      }
-    }
-  
-
-    gridDisplay.addEventListener('touchstart', function(e){
-        var touchobj = e.changedTouches[0]
-        dist = 0
-        startX = touchobj.pageX
-        startY = touchobj.pageY
-        startTime = new Date().getTime() // record time when finger first makes contact with surface
-        e.preventDefault()
-    }, false)
-
-    gridDisplay.addEventListener('touchmove', function(e){
-        e.preventDefault() // prevent scrolling when inside DIV
-    }, false)
-
-    gridDisplay.addEventListener('touchend', function(e){
-        var touchobj = e.changedTouches[0]
-        dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
-        elapsedTime = new Date().getTime() - startTime // get time elapsed
-        // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-        var swiperightBol = (elapsedTime <= allowedTime && dist >= threshold && Math.abs(touchobj.pageY - startY) <= 100)
-        handleswipe(swiperightBol)
-        e.preventDefault()
-    }, false)
-    */
-
-    /*$('.swipe').on('swipeleft', keyLeft)
-    $('.swipe').on('swiperight', keyRight)*/
 
     function detectswipe(el,func) {
       swipe_det = new Object();
