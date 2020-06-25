@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () =>  {
   }
 
 
-
   function keyRight() {
     moveRight()
     combineRow()
