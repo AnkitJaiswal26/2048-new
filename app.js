@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', () =>  {
   const gridDisplay = document.querySelector('.grid')
+  const div = document.querySelectorAll('.grid div')
   const scoreDisplay = document.getElementById('score')
   const resultDisplay = document.getElementById('result')
   let squares = []
   const width = 4
+  if(document.innerWidth < 1100){
+    gridDisplay.style.width = "256px"
+    div.width = "50px"
+  }
+ 
   let score = 0
   var threshold = 150 //required min distance traveled to be considered swipe
   var allowedTime = 200
@@ -155,6 +161,18 @@ document.addEventListener('DOMContentLoaded', () =>  {
       keyDown()
     }
   }
+
+  function control(e,d) {
+    if(d == 'l') {
+      keyLeft()
+    } else if (d == 'u') {
+      keyUp()
+    } else if (d =='r') {
+      keyRight()
+    } else if (d == 'd') {
+      keyDown()
+    }
+  }
   /*document.addEventListener('keyup', control)
 
   function check(e) {
@@ -288,8 +306,54 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }, false)
     */
 
-    $('.swipe').on('swipeleft', keyLeft)
-    $('.swipe').on('swiperight', keyRight)
+    /*$('.swipe').on('swipeleft', keyLeft)
+    $('.swipe').on('swiperight', keyRight)*/
+
+    function detectswipe(el,func) {
+      swipe_det = new Object();
+      swipe_det.sX = 0;
+      swipe_det.sY = 0;
+      swipe_det.eX = 0;
+      swipe_det.eY = 0;
+      var min_x = 20;  //min x swipe for horizontal swipe
+      var max_x = 40;  //max x difference for vertical swipe
+      var min_y = 40;  //min y swipe for vertical swipe
+      var max_y = 50;  //max y difference for horizontal swipe
+      var direc = "";
+      ele = document.getElementById(el);
+      ele.addEventListener('touchstart',function(e){
+        var t = e.touches[0];
+        swipe_det.sX = t.screenX; 
+        swipe_det.sY = t.screenY;
+      },false);
+      ele.addEventListener('touchmove',function(e){
+        e.preventDefault();
+        var t = e.touches[0];
+        swipe_det.eX = t.screenX; 
+        swipe_det.eY = t.screenY;    
+      },false);
+      ele.addEventListener('touchend',function(e){
+        //horizontal detection
+        if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y)))) {
+          if(swipe_det.eX > swipe_det.sX) direc = "r";
+          else direc = "l";
+        }
+        //vertical detection
+        if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x)))) {
+          if(swipe_det.eY > swipe_det.sY) direc = "d";
+          else direc = "u";
+        }
+    
+        if (direc != "") {
+          if(typeof func == 'function') func(el,direc);
+        }
+        direc = "";
+      },false);  
+    }
+
+
+
+    detectswipe('swipe',control1);
 
   }
   else {
