@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', () =>  {
   const resultDisplay = document.getElementById('result')
   let squares = []
   const width = 4
-  if(document.innerWidth < 1100){
-    gridDisplay.style.width = "256px"
-    div.width = "50px"
-  }
  
   let score = 0
   var threshold = 150 //required min distance traveled to be considered swipe
