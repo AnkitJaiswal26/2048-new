@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
   const div = document.querySelectorAll('.grid div')
   const scoreDisplay = document.getElementById('score')
   const resultDisplay = document.getElementById('result')
+  const winningMessageElement = document.getElementById('winningMessage')
+  const restartButton = document.getElementById('restartButton')
+  const screenscore = document.getElementById('screen_score')
   let squares = []
   const width = 4
  
@@ -25,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
   //generate a new number
   function generate() {
     randomNumber = Math.floor(Math.random() * squares.length)
+    console.log(randomNumber)
     if (squares[randomNumber].innerHTML == 0) {
       squares[randomNumber].innerHTML = 2
       checkForGameOver()
@@ -213,8 +217,6 @@ document.addEventListener('DOMContentLoaded', () =>  {
       },false);  
     }
 
-
-
     detectswipe('swipeme',control1);
 
   }
@@ -256,12 +258,28 @@ document.addEventListener('DOMContentLoaded', () =>  {
   function checkForWin() {
     for (let i=0; i < squares.length; i++) {
       if (squares[i].innerHTML == 2048) {
-        resultDisplay.innerHTML = 'You WIN'
         document.removeEventListener('keyup', control)
         setTimeout(() => clear(), 3000)
       }
     }
   }
+
+  function restartgame() {
+    for(let i=0 ; i<width*width ; i++){
+      squares[i].innerHTML = 0
+    }
+    document.addEventListener('keyup', control)
+    generate()
+    generate()
+    addColours()
+    score = 0
+    scoreDisplay.innerHTML = score
+    winningMessageElement.classList.remove('show')
+  }
+  
+  //Restart Game
+  restartButton.addEventListener('click', restartgame)
+
 
   //check if there are no zeros on the board to lose
   function checkForGameOver() {
@@ -272,9 +290,9 @@ document.addEventListener('DOMContentLoaded', () =>  {
       }
     }
     if (zeros === 0) {
-      resultDisplay.innerHTML = 'You LOSE'
+      winningMessageElement.classList.add('show')
+      screenscore.innerHTML = score
       document.removeEventListener('keyup', control)
-      setTimeout(() => clear(), 3000)
     }
   }
 

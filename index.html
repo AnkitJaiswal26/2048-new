@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>2048</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body id="swipeme">
 
@@ -16,7 +16,13 @@
         </div>
       </div>
       <span id="result">Join the numbers and get to the <b>2048</b> tile!</span>
-      <div class="grid"></div>
+      <div class="grid">
+      </div>
+
+      <div class="winning-message" id="winningMessage">
+        <div data-winning-message-text>Your Score: <b id="screen_score">100</b></div>
+        <button id="restartButton">Restart</button>
+      </div>
     </div>
     <script src="app.js" charset="utf-8"></script>
     
